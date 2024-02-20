@@ -16,7 +16,6 @@ dependencies = [
     "pprintpp",
     "flatdict"
 ]
-requires-python = ">=3.9"
 
 [project.urls]
 Homepage = "https://github.com/p1ne/yandex-quasar-cli"
