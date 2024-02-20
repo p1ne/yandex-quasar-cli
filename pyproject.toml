@@ -5,7 +5,7 @@ description = "Command line interface for Yandex Smart Home API"
 readme = "README.md"
 authors = [{name = "p1ne"}]
 license = {text = "Apache-2.0"}
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 classifiers = [
     "License :: OSI Approved :: Apache Software License"
 ]
