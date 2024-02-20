@@ -1,0 +1,31 @@
+[project]
+name = "yandex-quasar-cli"
+version = "0.1"
+description = "Command line interface for Yandex Smart Home API"
+readme = "README.md"
+authors = [{name = "p1ne"}]
+license = {text = "Apache-2.0"}
+requires-python = ">=3.8"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+keywords = [ "yandex", "quasar", "smart home", "cli"]
+dependencies = [
+    "click",
+    "msgspec",
+    "pprintpp",
+    "flatdict"
+]
+requires-python = ">=3.9"
+
+[project.urls]
+Homepage = "https://github.com/p1ne/yandex-quasar-cli"
+Changelog = "https://github.com/p1ne/yandex-quasar-cli/releases"
+Issues = "https://github.com/p1ne/yandex-quasar-cli/issues"
+CI = "https://github.com/p1ne/yandex-quasar-cli/actions"
+
+[project.entry-points.console_scripts]
+yandex-quasar-cli = "yandex_quasar_cli.cli:cli"
+
+[project.optional-dependencies]
+test = ["pytest"]
