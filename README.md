@@ -1,8 +1,8 @@
 # yandex-quasar-cli
 
-[![PyPI](https://img.shields.io/pypi/v/quasar-cli.svg)](https://pypi.org/project/quasar-cli/)
-[![Changelog](https://img.shields.io/github/v/release/p1ne/quasar-cli?include_prereleases&label=changelog)](https://github.com/p1ne/quasar-cli/releases)
-[![Tests](https://github.com/p1ne/quasar-cli/actions/workflows/test.yml/badge.svg)](https://github.com/p1ne/quasar-cli/actions/workflows/test.yml)
+[![PyPI](https://img.shields.io/pypi/v/yandex-quasar-cli.svg)](https://pypi.org/project/quasar-cli/)
+[![Changelog](https://img.shields.io/github/v/release/p1ne/yandex-quasar-cli?include_prereleases&label=changelog)](https://github.com/p1ne/quasar-cli/releases)
+[![Tests](https://github.com/p1ne/yandex-quasar-cli/actions/workflows/test.yml/badge.svg)](https://github.com/p1ne/quasar-cli/actions/workflows/test.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/p1ne/quasar-cli/blob/master/LICENSE)
 
 Интерфейс командной строки для Yandex Smart Home API
