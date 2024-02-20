@@ -1,6 +1,6 @@
 [project]
 name = "yandex-quasar-cli"
-version = "0.1.1"
+version = "0.1.2"
 description = "Command line interface for Yandex Smart Home API"
 readme = "README.md"
 authors = [{name = "p1ne"}]
@@ -14,7 +14,9 @@ dependencies = [
     "click>=8.1.7",
     "msgspec>=0.18.6",
     "pprintpp>=0.4.0",
-    "flatdict>=4.0.1"
+    "flatdict>=4.0.1",
+    "anyconfig>=0.14.0",
+    "deepdiff>=6.7.1"
 ]
 
 [project.urls]
