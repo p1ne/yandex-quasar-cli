@@ -52,7 +52,7 @@ Home Assistant [yandex_smart_home](https://github.com/dext0r/yandex_smart_home)
 |-----------------------------------------------|---------------------------------------------|
 | ```yandex-quasar-cli quasar```                | Получение общей информации о сущностях УДЯ  |
 | ```yandex-quasar-cli device```                | Работа с отдельным устройством  |
-| ```yandex-quasar-cli device```                | Работа с ключом OAuth  |
+| ```yandex-quasar-cli oauth```                 | Работа с ключом OAuth  |
 | ```yandex-quasar-cli snapshots```             | Работа со снапшотами состояния  |
 
 ### ```oauth```: работа с ключом OAuth
