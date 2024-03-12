@@ -16,7 +16,9 @@ dependencies = [
     "pprintpp>=0.4.0",
     "flatdict>=4.0.1",
     "anyconfig>=0.14.0",
-    "deepdiff>=6.7.1"
+    "deepdiff>=6.7.1",
+    "twine>=5.0.0",
+    "build>=1.1.1"
 ]
 
 [project.urls]
