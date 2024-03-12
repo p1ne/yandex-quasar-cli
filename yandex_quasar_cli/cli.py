@@ -71,9 +71,14 @@ def snapshot_save_command():
     help="Show external ids of changed objects only",
     is_flag=True,
 )
-def snapshot_save_command(full, no_props_caps, external_ids):
+@click.option(
+    "--ids",
+    help="Show external and internal ids of changed objects only",
+    is_flag=True,
+)
+def snapshot_compare_command(full, no_props_caps, external_ids, ids):
     """Compare Quasar state with saved snapshot"""
-    quasar_compare_snapshot(full, no_props_caps, external_ids)
+    quasar_compare_snapshot(full, no_props_caps, external_ids, ids)
 
 
 # Quasar operations ####################################################################################################
@@ -160,12 +165,17 @@ def device_info_command(device_id, tsv):
 
 
 @device.command(name="delete")
+@click.option(
+    "--ext",
+    help="Use external id (if omitted use internal id)",
+    is_flag=True,
+)
 @click.argument(
     "device_id",
     required=True
 )
-def device_delete_command(device_id):
-    quasar_delete(device_id)
+def device_delete_command(ext, device_id):
+    quasar_delete(ext, device_id)
 
 
 @device.command(name="switch-on")

@@ -36,7 +36,7 @@ def exclude_all_but_external_ids_callback(obj, path):
     return False if "external_id" in path else True
 
 
-def quasar_compare_snapshot(full, no_props_caps, external_ids):
+def quasar_compare_snapshot(full, no_props_caps, external_ids, ids):
     """Compare quasar state with saved snapshot"""
     config_check()
     req = Request("{}/user/info".format(settings.quasar_conf["base_url"]))
@@ -60,7 +60,7 @@ def quasar_compare_snapshot(full, no_props_caps, external_ids):
                          ignore_private_variables=True,
                          exclude_obj_callback=exclude_device_capabilities_properties_callback, group_by="external_id")
         click.echo(pprint.pprint(ddiff))
-    elif external_ids:
+    elif external_ids or ids:
         #flat_data_snapshot = flatdict.FlatDict(data_snapshot["devices"], delimiter='.')
         #flat_data_current = flatdict.FlatDict(data_current["devices"], delimiter='.')
 
@@ -70,11 +70,19 @@ def quasar_compare_snapshot(full, no_props_caps, external_ids):
         if "dictionary_item_added" in ddiff.keys():
             for added in ddiff["dictionary_item_added"]:
                 if added.count("[") == 1:
-                    click.echo("+{}".format(added.replace("root['", "").replace("']", "")))
+                    external_id = added.replace("root['", "").replace("']", "")
+                    if external_ids:
+                        click.echo("+{}".format(external_id))
+                    elif ids:
+                        click.echo("+{} # {}".format(external_id, quasar_get_device_id_by_external_id(external_id)))
         if "dictionary_item_removed" in ddiff.keys():
             for removed in ddiff["dictionary_item_removed"]:
                 if removed.count("[") == 1:
-                    click.echo("-{}".format(removed.replace("root['", "").replace("']", "")))
+                    external_id = removed.replace("root['", "").replace("']", "")
+                    if external_ids:
+                        click.echo("-{}".format(external_id))
+                    elif ids:
+                        click.echo("-{} # {}".format(external_id, quasar_get_device_id_by_external_id(external_id)))
     else:
         flat_data_snapshot = flatdict.FlatterDict(data_snapshot, delimiter='.')
         flat_data_current = flatdict.FlatterDict(data_current, delimiter='.')
@@ -124,9 +132,13 @@ def quasar_get_info(device_id, tsv):
         obj.print()
 
 
-def quasar_delete(device_id):
+def quasar_delete(ext, device_id):
     config_check()
-    req = Request("{}/devices/{}".format(settings.quasar_conf["base_url"], device_id))
+    del_id = device_id
+    if ext:
+        del_id = quasar_get_device_id_by_external_id(device_id)
+
+    req = Request("{}/devices/{}".format(settings.quasar_conf["base_url"], del_id))
     req.add_header('Authorization', 'Bearer {}'.format(settings.quasar_conf["oauth_key"]))
     req.method = "DELETE"
     data = decode(urlopen(req).read(), type=Status)
@@ -190,3 +202,18 @@ def config_check():
         click.echo("Please store OAuth key with oauth save-key command.")
         click.echo("Use oauth help command to get detailed instructions.")
         exit(1)
+
+
+def quasar_get_device_id_by_external_id(external_id):
+    """Smart home info"""
+    config_check()
+    req = Request("{}/user/info".format(settings.quasar_conf["base_url"]))
+    req.method = "GET"
+    req.add_header('Authorization', 'Bearer {}'.format(settings.quasar_conf["oauth_key"]))
+    data = decode(urlopen(req).read(), type=QuasarResponse)
+    obj = data.devices
+
+    for record in obj:
+        if record.external_id == external_id:
+            return record.id
+    return None
