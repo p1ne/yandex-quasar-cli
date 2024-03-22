@@ -66,6 +66,12 @@ class HouseholdObject(QuasarObject, kw_only=True):
     name: str
     type: str
 
+    def print(self):
+        click.echo("{} {}".format(self.id, self.name))
+
+    def print_tsv(self):
+        click.echo("Id: {}\nName: {}\n".format(self.id, self.name))
+
 
 class GroupObject(QuasarObject, kw_only=True):
     id: str
